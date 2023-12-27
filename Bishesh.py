@@ -1709,5 +1709,4 @@ def not_available(konten):
 if __name__ == '__main__':
     resik()
     tampilan_menu()
-
-# print('%s[%s•%s] %s'%(J,P,J,P))
+print('%s[%s•%s] %s'%(J,P,J,P))
