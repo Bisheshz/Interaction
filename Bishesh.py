@@ -1,3 +1,5 @@
+###----------[ AUTHOR & CREATOR ]---------- ###
+# ------ [ Gausah Dioprek Ntar Error ] ------ #
 Author    = 'Dapunta Khurayra X'
 Facebook  = 'Facebook.com/Dapunta.Khurayra.X'
 Instagram = 'Instagram.com/Dapunta.Ratya'
@@ -392,6 +394,113 @@ def pilih_menu():
     else:print('\n   %s[%s•%s] %sIsi Yang Benar %s!%s\n'%(M,P,M,P,M,P));exit()
 
 ###----------[ USER AGENT ]---------- ###
+def useragent(isi):
+    global pengguna_source_code
+    pengguna_source_code = isi
+    try:os.mkdir("tool")
+    except:pass
+    pilih_menu_user_agent()
+    dc = input('   %s└──> %s'%(A,J))
+    if dc in ['1','01','a']:scrap_useragent()
+    elif dc in ['2','02','b']:pilih_otomatis()
+    elif dc in ['3','03','c']:manual_user_agent()
+    elif dc in ['4','04','d']:ua_device_ini()
+    elif dc in ['5','05','e']:cek_user_agent()
+    elif dc in ['0','00','z']:tampilan_menu()
+    else:print('\n   %s[%s•%s] %sIsi Yang Benar %s!%s\n'%(M,P,M,P,M,P));exit()
+def pilih_menu_user_agent():
+    tampilan_menu_user_agent = f'''  {J2}[{A2}01{J2}] {P2}Scrap UA Browser    {J2}[{A2}04{J2}] {P2}Cari UA HP Ini
+  {J2}[{A2}02{J2}] {P2}Ganti UA Otomatis   {J2}[{A2}05{J2}] {P2}Cek UA Digunakan
+  {J2}[{A2}03{J2}] {P2}Ganti UA Manual     {J2}[{A2}00{J2}] {P2}Kembali'''
+    printer(Panel(tampilan_menu_user_agent,title=f'{J2}[ {P2}User Agent {J2}]',subtitle=f'{A2}┌─ {J2}[ {P2}Pilih {J2}]',subtitle_align='left',width=54,padding=1,style='#FF8F00'))
+def pilih_device():
+    tampilan_device = f'''   {J2}[{A2}01{J2}] {P2}Samsung    {J2}[{A2}05{J2}] {P2}Vivo      {J2}[{A2}09{J2}] {P2}Huawei
+   {J2}[{A2}02{J2}] {P2}Nokia      {J2}[{A2}06{J2}] {P2}Iphone    {J2}[{A2}10{J2}] {P2}Windows
+   {J2}[{A2}03{J2}] {P2}Xiaomi     {J2}[{A2}07{J2}] {P2}Asus      {J2}[{A2}11{J2}] {P2}Chrome
+   {J2}[{A2}04{J2}] {P2}Oppo       {J2}[{A2}08{J2}] {P2}Lenovo    {J2}[{A2}12{J2}] {P2}FB'''
+    printer(Panel(tampilan_device,title=f'{J2}[ {P2}Device {J2}]',subtitle=f'{A2}┌─ {J2}[ {P2}Pilih {J2}]',subtitle_align='left',width=54,padding=1,style='#FF8F00'))
+def scrap_useragent():
+    data_ua = {}
+    pt = 0
+    pilih_device()
+    dc = input('   %s└──> %s'%(A,J))
+    if dc in ['1','01','a']:     type = 'software_name/samsung-browser'
+    elif dc in ['2','02','b']:   type = 'software_name/nokia-browser'
+    elif dc in ['3','03','c']:   type = 'operating_platform_string/xiaomi-mi-a1'
+    elif dc in ['4','04','d']:   type = 'operating_platform_string/oppo-f1s-a1601'
+    elif dc in ['5','05','e']:   type = 'operating_platform_string/vivo'
+    elif dc in ['6','06','f']:   type = 'operating_platform_string/apple'
+    elif dc in ['7','07','g']:   type = 'operating_platform_string/asus'
+    elif dc in ['8','08','h']:   type = 'operating_platform_string/lenovo'
+    elif dc in ['9','09','i']:   type = 'operating_platform_string/huawei'
+    elif dc in ['10','010','j']: type = 'operating_system_name/windows'
+    elif dc in ['11','011','k']: type = 'operating_system_name/chrome-os'
+    elif dc in ['12','012','l']: type = 'software_name/facebook-app'
+    else:print('\n   %s[%s•%s] %sIsi Yang Benar %s!%s\n'%(M,P,M,P,M,P));exit()
+    url = 'https://developers.whatismybrowser.com/useragents/explore/' + type
+    with requests.Session() as xyz:
+        req = xyz.get(url)
+        pra = par(req.content,'html.parser')
+        li = re.findall('<td><a class=\".*?\" href=\".*?\">(.*?)</a></td>',str(pra))
+        for y in li:
+            try:
+                x = f'{A2}'+y
+                pt += 1
+                pu = str(pt)
+                data_ua.update({pu:x.replace('[#AAAAAA]','')})
+                printer(Panel(x,title=f'{J2}[{P2}{pu}{J2}]',width=54,title_align='left',style='#FF8F00'))
+                time.sleep(2)
+            except KeyboardInterrupt:break
+    ch = int(input('   %s└──> %s'%(A,J)))
+    try:
+        open('tool/useragent.json','w').write(data_ua[str(ch)])
+        pilihan = open('tool/useragent.json','r').read()
+        printer(Panel(f'''{A2}{pilihan}''',title=f'{J2}[ {P2}User Agent {J2}]',subtitle=f'{J2}[ {P2}Sukses Diganti {J2}]',padding=(1,4),width=54,title_align='center',style='#FF8F00'))
+        if pengguna_source_code == 'old':input('\n   %s[ %sKembali %s]'%(J,P,J));tampilan_menu()
+        else:print('\n               %s[ %sJalankan Ulang SCnya %s]'%(J,P,J));exit('\n')
+    except Exception as e:print('\n   %s[%s•%s] %sIsi Yang Benar %s!%s\n'%(M,P,M,P,M,P));exit()
+def pilih_otomatis():
+    pilih_device()
+    dc = input('   %s└──> %s'%(A,J))
+    if dc in ['0','00','z']:     open('tool/useragent.json','w').write(ua_default)
+    elif dc in ['1','01','a']:   open('tool/useragent.json','w').write(ua_samsung)
+    elif dc in ['2','02','b']:   open('tool/useragent.json','w').write(ua_nokia)
+    elif dc in ['3','03','c']:   open('tool/useragent.json','w').write(ua_xiaomi)
+    elif dc in ['4','04','d']:   open('tool/useragent.json','w').write(ua_oppo)
+    elif dc in ['5','05','e']:   open('tool/useragent.json','w').write(ua_vivo)
+    elif dc in ['6','06','f']:   open('tool/useragent.json','w').write(ua_iphone)
+    elif dc in ['7','07','g']:   open('tool/useragent.json','w').write(ua_asus)
+    elif dc in ['8','08','h']:   open('tool/useragent.json','w').write(ua_lenovo)
+    elif dc in ['9','09','i']:   open('tool/useragent.json','w').write(ua_huawei)
+    elif dc in ['10','010','j']: open('tool/useragent.json','w').write(ua_windows)
+    elif dc in ['11','011','k']: open('tool/useragent.json','w').write(ua_chrome)
+    elif dc in ['12','012','l']: open('tool/useragent.json','w').write(ua_fb)
+    else:print('\n   %s[%s•%s] %sIsi Yang Benar %s!%s\n'%(M,P,M,P,M,P));exit()
+    try:
+        pilihan = open('tool/useragent.json','r').read()
+        printer(Panel(f'''{A2}{pilihan}''',title=f'{J2}[ {P2}User Agent {J2}]',subtitle=f'{J2}[ {P2}Sukses Diganti {J2}]',padding=(1,4),width=54,title_align='center',style='#FF8F00'))
+        if pengguna_source_code == 'old':input('\n   %s[ %sKembali %s]'%(J,P,J));tampilan_menu()
+        else:print('\n               %s[ %sJalankan Ulang SCnya %s]'%(J,P,J));exit('\n')
+    except Exception as e:print('\n   %s[%s•%s] %sIsi Yang Benar %s!%s\n'%(M,P,M,P,M,P));exit()
+def manual_user_agent():
+    usera = input('       %s[%s•%s] %sMasukkan User Agent :\n%s'%(J,P,J,P,J))
+    if usera in ['',' ','  ','   ']:print('\n       %s[%s•%s] %sIsi Yang Benar %s!%s\n'%(M,P,M,P,M,P));manual_user_agent()
+    else:open('tool/useragent.json','w').write(usera);cek_user_agent()
+def ua_device_ini():
+    url = 'https://www.google.com/search?q=my+user+agent'
+    try:
+        if "linux" in sys.platform.lower():chrome_path = '/usr/bin/google-chrome %s';webbrowser.get(chrome_path).open(url)
+        elif "win" in sys.platform.lower():chrome_path = 'C:/Program Files (x86)/Google/Chrome/Application/chrome.exe %s';webbrowser.get(chrome_path).open(url)
+        else:chrome_path = 'open -a /Applications/Google\ Chrome.app %s';webbrowser.get(chrome_path).open(url)
+        manual_user_agent()
+    except Exception as e:print('\n   %s[%s•%s] %sTidak Dapat Menemukan Useragent %s!%s\n'%(M,P,M,P,M,P));time.sleep(3);tampilan_menu()
+def cek_user_agent():
+    try:
+        usera = open('tool/useragent.json','r').read()
+        printer(Panel(f'''{A2}{usera}''',title=f'{J2}[ {P2}User Agent {J2}]',subtitle=f'{J2}[ {P2}Saat Ini {J2}]',padding=(1,4),width=54,title_align='center',style='#FF8F00'))
+        input('\n   %s[ %sKembali %s]'%(J,P,J))
+        tampilan_menu()
+    except Exception as e:kecuali(e)
 
 ###----------[ DUMP ID PUBLIC ]---------- ###
 def publik():
@@ -1602,4 +1711,5 @@ def not_available(konten):
 if __name__ == '__main__':
     resik()
     tampilan_menu()
-print('%s[%s•%s] %s'%(J,P,J,P))
+
+# print('%s[%s•%s] %s'%(J,P,J,P))
