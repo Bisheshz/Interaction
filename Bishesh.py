@@ -397,7 +397,7 @@ def useragent(isi):
     pengguna_source_code = isi
     try:os.mkdir("tool")
     except:pass
-    pilih_menu_user_agent()
+    #pilih_menu_user_agent()
     dc = input('   %s└──> %s'%(A,J))
     if dc in ['1','01','a']:scrap_useragent()
     elif dc in ['2','02','b']:pilih_otomatis()
