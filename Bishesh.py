@@ -78,11 +78,6 @@ CoY = ('\r   %s[%s•%s] %sDilarang Keras Merecode %s!%s'%(M,P,M,P,M,P))
 _bulan_ = bulan_cek[bulan_skrng]
 tanggal = ("%s-%s-%s"%(hari,_bulan_,tahun))
 
-###----------[ APPEND ]---------- ###
-OK = []
-CP = []
-gabung_sandi = []
-tempel_sandi = []
 
 ###----------[ JANGAN DIHAPUS NANTI ERROR ]---------- ###
 SAKERA = Codename + len(Author) - len(Facebook) + len(Instagram) - len(Whatsapp) + len(YouTube)
@@ -345,39 +340,6 @@ def metode_scrap_api():
     else:print('\n   %s[%s•%s] %sIsi Yang Benar %s!%s\n'%(M,P,M,P,M,P));exit()
 
 ###----------[ URUTAN CRACK ]---------- ###
-def urut_crack():
-
-###----------[ ADD VARIATION MODE ]---------- ###
-def pilihan_sakdurunge_crack():
-    global pilih_cek_opsi, pilih_cek_apk, pilih_proxy
-    print('')
-    print('   %s[%s•%s] %sCek Opsi Akun %sCP %s?'%(J,P,J,P,J,P))
-    tanya_cek_opsi = input('     %s└─> %s[%sy%s/%st%s] %s: %s'%(A,J,A,P,A,J,P,J)).lower()
-    if tanya_cek_opsi in ['1','y']:pilih_cek_opsi = True
-    else:pilih_cek_opsi = False
-    print('   %s[%s•%s] %sCek APK Akun %sOK %s?'%(J,P,J,P,H,P))
-    tanya_cek_apk = input('     %s└─> %s[%sy%s/%st%s] %s: %s'%(A,J,A,P,A,J,P,J)).lower()
-    if tanya_cek_apk in ['1','y']:pilih_cek_apk = True
-    else:pilih_cek_apk = False
-    print('   %s[%s•%s] %sGunakan %sProxy %s?'%(J,P,J,P,O,P))
-    tanya_proxy = input('     %s└─> %s[%sy%s/%st%s] %s: %s'%(A,J,A,P,A,J,P,J)).lower()
-    if tanya_proxy in ['1','y']:pilih_proxy = True
-    else:pilih_proxy = False
-
-###----------[ ADD MANUAL PASS ]---------- ###
-def addpass():
-    global pass_manual1, pass_manual2
-    print('')
-    print('   %s[%s•%s] %sPass Manual %s[ %s1 Kata %s]'%(J,P,J,P,J,A,J))
-    pass_manual1 = input('     %s└─> %s'%(A,J))
-    print('   %s[%s•%s] %sPass Manual %s[ %sBelakang Nama %s]'%(J,P,J,P,J,A,J))
-    pass_manual2 = input('     %s└─> %s'%(A,J))
-    try:os.remove('tool/passmanual.json')
-    except:pass
-    try:os.remove('tool/passangka.json')
-    except:pass
-    open('tool/passmanual.json','w').write(pass_manual1)
-    open('tool/passangka.json','w').write(pass_manual2)
 
 ###----------[ SOURCE LOGIN ]---------- ###
 
